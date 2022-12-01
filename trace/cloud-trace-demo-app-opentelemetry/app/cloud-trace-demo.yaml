@@ -32,6 +32,7 @@ spec:
       containers:
       - name: cloud-trace-demo-container
         # image: gcr.io/google_samples/cloud-trace-demo-opentelemetry:latest
+               
         image: barrymullan/cloud-trace-demo-opentelemetry:latest
         imagePullPolicy: "Always"
         command:
