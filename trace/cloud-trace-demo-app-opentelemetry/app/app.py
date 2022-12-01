@@ -19,6 +19,7 @@ A sample app demonstrating CloudTraceSpanExporter
 import os
 import random
 import time
+import logging
 
 import flask
 # [START trace_demo_imports]
@@ -32,6 +33,18 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 # [END trace_demo_imports]
 import requests
+
+# Imports the Cloud Logging client library
+import google.cloud.logging
+
+# Instantiates a client
+client = google.cloud.logging.Client()
+
+# Retrieves a Cloud Logging handler based on the environment
+# you're running in and integrates the handler with the
+# Python logging module. By default this captures all logs
+# at INFO level and higher
+client.setup_logging()
 
 
 # [START trace_demo_create_exporter]
@@ -63,6 +76,8 @@ def template_test():
     # Return received input with the keyword
     keyword = os.getenv("KEYWORD")
     endpoint = os.getenv("ENDPOINT")
+    logging.info('cloud-trace-demo-app-opentelemetry keyword=%s endpoint=%s',keyword,endpoint)
+    
 # [START trace_context_header]
     if endpoint is not None and endpoint != "":
         data = {'body': keyword}
