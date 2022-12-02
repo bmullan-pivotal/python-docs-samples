@@ -39,3 +39,10 @@ else
   echo "There is a problem with the setup. Cannot determine the endpoint."
 fi
 popd
+
+
+# to test:
+# curl $(kubectl get svc -o=jsonpath='{.items[?(@.metadata.name=="cloud-trace-demo-a")].status.loadBalancer.ingress[0].ip}') && echo
+
+echo "To test..."
+echo "curl $(kubectl get svc -o=jsonpath='{.items[?(@.metadata.name=="cloud-trace-demo-a")].status.loadBalancer.ingress[0].ip}') && echo"
