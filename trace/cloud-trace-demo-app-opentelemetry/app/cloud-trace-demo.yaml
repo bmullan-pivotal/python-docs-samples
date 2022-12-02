@@ -162,3 +162,35 @@ spec:
     port: 8090
     targetPort: 8090
   type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-trace-demo-client
+  labels:
+    app: cloud-trace-demo-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-trace-demo-client
+  template:
+    metadata:
+      name: cloud-trace-demo-client
+      labels:
+        app: cloud-trace-demo-client
+    spec:
+      containers:
+      - name: cloud-trace-demo-client-container
+        # image: gcr.io/google_samples/cloud-trace-demo-opentelemetry:latest
+        image: barrymullan/cloud-trace-demo-opentelemetry:latest
+        imagePullPolicy: "Always"
+        command:
+        - python
+        args:
+        - client.py
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
