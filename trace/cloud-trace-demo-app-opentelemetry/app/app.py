@@ -76,8 +76,8 @@ def template_test():
     # Return received input with the keyword
     keyword = os.getenv("KEYWORD")
     endpoint = os.getenv("ENDPOINT")
-    logging.info('cloud-trace-demo-app-opentelemetry keyword=%s endpoint=%s',keyword,endpoint)
-    
+    logging.info('cloud-trace-demo-app-opentelemetry {\'keyword\':\'%s\', \'endpoint\':\'%s\'}',keyword,endpoint)
+
 # [START trace_context_header]
     if endpoint is not None and endpoint != "":
         data = {'body': keyword}
@@ -93,4 +93,4 @@ def template_test():
 
 if __name__ == "__main__":
     port = os.getenv("PORT")
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=False, host="0.0.0.0", port=port)
