@@ -26,7 +26,7 @@ def heavy_func():
         for x in range(cnt):
             try:
                 print(".",end="")
-                response = requests.get("http://35.188.38.77:80/",timeout=5)
+                response = requests.get("http://cloud-trace-demo-a/",timeout=5)
                 response.raise_for_status()
                 logging.info("cloud-trace-demo-app-opentelemetry-client elapsed=%s",str(response.elapsed.total_seconds()))
        
